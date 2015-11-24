@@ -1,11 +1,11 @@
 
-////////////////////////////////////////
+////////////////////////////////////////////
 //	****** LBYEC72 FINAL PROJECT****  //
-// 		2016 DLSU PLANNER 			  //
+// 		2016 DLSU PLANNER 	  //
 //	   Basco, Gonzales, Jolo          //
-//   Submitted on November 24, 2015   //
-//  	Submitted to Sir Cabatuan     //
-////////////////////////////////////////
+//   Submitted on November 24, 2015       //
+//  	Submitted to Sir Cabatuan         //
+////////////////////////////////////////////
 
 #include <stdio.h> 
 #include <stdlib.h>
