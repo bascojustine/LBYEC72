@@ -1,0 +1,311 @@
+
+////////////////////////////////////////
+//	****** LBYEC72 FINAL PROJECT****  //
+// 		2016 DLSU PLANNER 			  //
+//	   Basco, Gonzales, Jolo          //
+//   Submitted on November 24, 2015   //
+//  	Submitted to Sir Cabatuan     //
+////////////////////////////////////////
+
+#include <stdio.h> 
+#include <stdlib.h>
+#include <string.h>
+#include <iostream>
+
+void swapNumbers(int *pA, int *pB){
+	int temp;
+	temp = *pB;
+	*pB = *pA;
+	*pA = temp;
+}
+
+void swapString(char *str1, char *str2)
+{
+     str1= strcpy(str2, str1);
+ 
+} 
+typedef struct{
+	char event [180];
+	char name[180];
+	char holiday[180];
+	int age;
+	int start;
+	int end;
+	
+}planner;
+
+int main()
+{
+	planner month[13][32];
+	
+	
+	//INITIALIZE COUNTER//
+	int cevent[13], cbday[13],j, devent[13], dbday[13];
+	
+	for(j=0;j<13;j++){
+		cevent[j]=0;
+		cbday[j]=0;
+		devent[j]=0; 
+		dbday[j]=0; 
+	}
+		
+	//MONTH LABELS//	
+	strcpy(month[1][0].name, "JANUARY");
+	strcpy(month[2][0].name, "FEBRUARY");
+	strcpy(month[3][0].name, "MARCH");
+	strcpy(month[4][0].name, "APRIL");
+	strcpy(month[5][0].name, "MAY");
+	strcpy(month[6][0].name, "JUNE");
+	strcpy(month[7][0].name, "JULY");
+	strcpy(month[8][0].name, "AUGUST");
+	strcpy(month[9][0].name, "SEPTEMBER");
+	strcpy(month[10][0].name, "OCTOBER");
+	strcpy(month[11][0].name, "NOVEMBER");
+	strcpy(month[12][0].name, "DECEMBER");
+	
+	
+    //HARD CODE HOLIDAYS//
+    strcpy(month[1][1].holiday, "NEW YEAR");
+    strcpy(month[2][8].holiday, "CHINESE NEW YEAR");
+    strcpy(month[2][25].holiday, "EDSA REVOLUTION");
+    strcpy(month[3][24].holiday, "MAUNDY THURSDAY");
+    strcpy(month[3][25].holiday, "GOOD FRIDAY");
+    strcpy(month[3][26].holiday, "BLACK SATURDAY");
+    strcpy(month[4][9].holiday, "ARAW NG KAGITINGAN");
+    strcpy(month[5][1].holiday, "LABOR DAY");
+    strcpy(month[6][12].holiday, "INDEPENDENCE DAY");
+    strcpy(month[8][21].holiday, "NINOY AQUINO DAY");
+    strcpy(month[8][29].holiday, "NATIONAL HEROES DAY");
+    strcpy(month[11][1].holiday, "ALL SAINTS' DAY'");
+    strcpy(month[11][30].holiday, "BONIFACIO DAY");
+    strcpy(month[12][25].holiday, "CHRISTMAS");
+    strcpy(month[12][30].holiday, "RIZAL DAY");
+    
+	int command, mon, date, add_mon, add_date, i,length,add, a, b, rstart, rend, dentry, dmonth, ddate, dstart, dend, dage, emonth,eentry, edate, estart, eend, eage; 
+	int l2, l3, l4; 
+	char search[180], edit_event[180], edit_bday[180];
+		
+	
+	while(1){
+	
+	//MAIN MENU//
+	printf("\n\n\t\t*****Welcome to the DLSU 2016 Student Planner!***");
+    printf("\n\n\t1. View Calendar");
+    printf("\n\t2. Add Entry");
+    printf("\n\t3. Delete Entry");
+    printf("\n\t4. Edit Entry");
+    printf("\n\t5. Compile and Print");
+    printf("\n\t6.Exit Program");
+    printf("\n\n\tPlease enter command: ");
+    scanf("%d", &command);
+    system("cls");
+    
+
+    switch (command){
+    	case 1:{ //VIEW EVENTS, BIRTHDAYS, AND HOLIDAYS//
+    	printf("\t*****Events of 2016*****\n");
+    	printf("\t1.January\n\t2.February\n\t3.March\n\t4.April\n\t5.May\n\t6.June\n\t7.July\n\t8.August\n\t9.September\n\t10.October\n\t11.November\n\t12.December\n\n");
+    	printf("\tPlease enter month:");
+    	scanf("%d", &mon);
+    	system("cls");
+    	printf("\n*****%s******\n\n", month[mon][0].name);
+    	
+    	for(i=1;i<32;i++){
+    		length = strlen(month[mon][i].event);
+    		if(length != 0) {
+			printf("\t[%d]\t%s\n",i,month[mon][i].event);
+			printf("\t\tStart Time: %d\n", month[mon][i].start);
+			printf("\t\tEnd Time: %d\n", month[mon][i].end);
+			}
+		}
+		for(i=1;i<32;i++){
+    		length = strlen(month[mon][i].name);
+    		if(length != 0) {
+			printf("\t[%d]\t %s turns %d today!\n",i, month[mon][i].name, month[mon][i].age);
+			}
+		}
+    	
+    	for(i=1;i<32;i++){
+    		length = strlen(month[mon][i].holiday);
+    		if(length != 0) {
+			printf("\n\t[%d][Holiday]%s\t\n\n",i, month[mon][i].holiday);
+			}
+		}
+			
+			break;
+		
+		}
+		case 2:{//ADDITIONAL ENTRIES OF BIRTHDAYS AND EVENTS//
+			printf("\tPLANNER 2016\n");
+			printf("\t1.January\n\t2.February\n\t3.March\n\t4.April\n\t5.May\n\t6.June\n\t7.July\n\t8.August\n\t9.September\n\t10.October\n\t11.November\n\t12.December\n\n");
+			printf("\tPlease enter month:");
+    		scanf("%d", &add_mon);
+    		printf("\n\tPlease enter date:");
+    		scanf("%d", &add_date);
+    		printf("\n\tTYPE OF ENTRY");
+    		printf("\n\t1.Event\n\t2.Birthday\n");
+			printf("\n\tPlease select a type of entry:");
+			scanf("%d", &add);
+			system("cls");
+			switch(add){
+				//EVENT//
+				case 1:{
+					cevent[add_mon]= cevent[add_mon]+1;
+					printf("\n\tPlease input the scheduled event:");
+					scanf("%s",&month[add_mon][add_date].event);
+					printf("\n\tStart Time:");
+					scanf("%d", &month[add_mon][add_date].start);
+					printf("\n\tEnd Time:");
+					scanf("%d", &month[add_mon][add_date].end);
+					break;
+				}  
+				//BIRTHDAY//
+				case 2:{
+					cbday[add_mon]= cbday[add_mon]; 
+					printf("\n\tName of Birthday Celebrant:");
+					scanf("%s", &month[add_mon][add_date].name);
+					printf("\n\tAge of Birthday Celebrant:");
+					scanf("%d", &month[add_mon][add_date].age);
+					
+					break;
+				}
+			}
+			
+			break;
+		}
+		case 3:{//DELETE ENTRY//
+			printf("\tPLANNER 2016\n");
+			printf("\t1.January\n\t2.February\n\t3.March\n\t4.April\n\t5.May\n\t6.June\n\t7.July\n\t8.August\n\t9.September\n\t10.October\n\t11.November\n\t12.December\n\n");
+			printf("\tPlease enter month where you would like to delete the event:");
+    		scanf("%d", &dmonth);
+    		printf("\n\tPlease enter date:");
+    		scanf("%d", &ddate);
+    		printf("\n\tTYPE OF ENTRY");
+    		printf("\n\t1.Event\n\t2.Birthday\n");
+			printf("\n\tPlease select a type of entry:");	
+			scanf("%d", &dentry);
+			system("cls");
+			switch(dentry){
+				//EVENT//
+				case 1:{
+					devent[dmonth]= devent[dmonth]+1;
+					printf("\tPlease input the event that you would like to delete:");
+					scanf("%s",search);
+					printf("\n\tStart Time:");
+					scanf("%d", &dstart);
+					printf("\n\tEnd Time:");
+					scanf("%d", &dend);
+					
+					if (strcmp(month[dmonth][ddate].event,search)==0)
+	   				 {
+	   				   printf("\n\t%s has been removed\n\n", month[dmonth][ddate].event);
+					   strcpy(month[dmonth][ddate].event,"");
+					   month[dmonth][ddate].start = 0;
+					   month[dmonth][ddate].start = 0; 
+	    			 }
+					break;
+				}  
+				//BIRTHDAY//
+				case 2:{
+					dbday[dmonth]= dbday[dmonth]; 
+					printf("\n\tPlease input the name that you would like to delete:");
+					scanf("%s",search);
+					printf("\n\tPlease input the age of  %s:", search);
+					scanf("%d",&dage);
+					
+					if (strcmp(month[dmonth][ddate].name,search)==0)
+	   				 {
+	   				   printf("\n\t%s has been removed\n\n", month[dmonth][ddate].name);
+					   strcpy(month[dmonth][ddate].name,"");
+					   month[dmonth][ddate].age = 0;
+	    			 }
+					break;
+				}
+			}
+			break;
+	    }
+	
+			
+		case 4:{//EDIT ENTRY//
+			printf("\tPLANNER 2016\n");
+			printf("\t1.January\n\t2.February\n\t3.March\n\t4.April\n\t5.May\n\t6.June\n\t7.July\n\t8.August\n\t9.September\n\t10.October\n\t11.November\n\t12.December\n\n");
+			printf("\tPlease enter month that you would like to edit:");
+    		scanf("%d", &emonth);
+    		printf("\n\tPlease enter date:");
+    		scanf("%d", &edate);
+    		printf("\n\tTYPE OF ENTRY");
+    		printf("\n\t1.Event\n\t2.Birthday\n");
+			printf("\n\tPlease select a type of entry:");
+			scanf("%d", &eentry);
+			system("cls");
+			switch(eentry){
+				//EVENT//
+				case 1:{
+					printf("\n\tPlease input the event that you would like to change it to:");
+					scanf("%s",edit_event);
+					printf("\n\tNew Start Time:");
+					scanf("%d", &estart);
+					printf("\n\tNew End Time:");
+					scanf("%d", &eend);
+					
+					swapString(edit_event, month[emonth][edate].event);
+					swapNumbers(&estart, &month[emonth][edate].start);
+					swapNumbers(&eend, &month[emonth][edate].end);
+					break;
+				}  
+				//BIRTHDAY//
+				case 2:{
+					 
+					printf("\n\tPlease input the name that you would like to change it to:");
+					scanf("%s",edit_bday);
+					printf("\n\tPlease input the age of  %s:", edit_bday);
+					scanf("%d",&eage);
+					
+					swapString(edit_bday, month[emonth][edate].name );
+					swapNumbers(&eage, &month[emonth][edate].age);
+					break;
+				}
+			}
+			break;
+		}
+		case 5:{          //COMPILES EVENTS AND PRINTS TO .TXT FILE//
+		 
+		FILE *fp;
+     	
+     	int m,d;
+     	fp = fopen("PLANNER.TXT","w"); 
+     	for (m= 1; m<13; m++){
+     		fprintf(fp, "*****%s*****\n", month[m][0].name);
+     		for(d=1; d<32; d++){
+     		l2 = strlen(month[m][d].event);
+    		if(l2 != 0) {
+			fprintf(fp, "\t[%d]\t%s\n",i,month[m][d].event);
+			fprintf(fp,"\t\tStart Time: %d\n", month[m][d].start);
+			fprintf(fp,"\t\tEnd Time: %d\n", month[m][d].end);
+		}
+			
+			l3 = strlen(month[m][d].name);
+    		if(l3 != 0) {
+			fprintf(fp,"\t[%d]\t %s turns %d today!\n",d, month[m][d].name, month[m][d].age);
+		}
+				
+			l4 = strlen(month[m][d].holiday);
+    		if(l4 != 0) {
+			fprintf(fp,"\n\t[%d][Holiday]%s\t\n\n",i, month[m][d].holiday);
+			}	 
+			}
+			}
+     	
+     	fclose(fp); 
+			break;
+		}
+    	case 6:{
+    		return 0;
+			break;
+		}
+	}
+		getchar();
+    		
+		}
+return EXIT_SUCCESS;}
+
